@@ -1,5 +1,5 @@
 {
 	"CWD":["s",""],
 	"TITLE":["s","fr-sh"],
-	"PROMPT":["s","fr-sh {} >"]
+	"PROMPT":["s","fr-sh !p >"]
 }
