@@ -20,6 +20,7 @@ class PromptInterface:
 		#print(self.commandhistory) 
 	def execCmd(self,cmd):
 		if cmd.lower().strip() == "exit":
+			print("\n")
 			sys.exit()
 		print(f"\nUnknown CMD: {cmd}")
 	def getPrompt(self):
@@ -28,6 +29,8 @@ class PromptInterface:
 			prompt = prompt.replace("!p",LanguageControls.VARIABLES["CWD"][1])
 		while "!s" in prompt:
 			prompt = prompt.replace("!s",LanguageControls.VARIABLES["SCWD"][1])
+		while "!c" in prompt:
+			prompt = prompt.replace("!c","\033[")
 		return prompt
 	def execute(self):
 		while True:
