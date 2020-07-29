@@ -16,7 +16,10 @@ def getDefaultPath(path):
 
 def launch():
 	InitialVariables.read()
-	LanguageControls.VARIABLES["CWD"] = getDefaultPath(LanguageControls.VARIABLES["CWD"][1])
+	CWD = getDefaultPath(LanguageControls.VARIABLES["CWD"][1])
+	LanguageControls.VARIABLES["CWD"][1] = CWD
+	CWD = CWD.replace(os.path.expanduser("~"),"~")
+	LanguageControls.VARIABLES["SCWD"] = ["s",CWD]
 	InterfaceControl.RegisterInterface("prompt",PromptInterface.PromptInterface)
 	Interface.MODE="prompt"
 

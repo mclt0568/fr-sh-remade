@@ -1,6 +1,6 @@
 from Interface.PromptInterface import Events
-from LaunchControls.InitializeInterface import PromptInterfaceKeyEvents
+from Interface.PromptInterface.Events import KeyEvents
 
 def initPromptInterface():
-	Events.registerKeyEvent("\r",PromptInterfaceKeyEvents.enter)
-	Events.registerKeyEvent("\x7f",PromptInterfaceKeyEvents.backspace)
+	Events.registerKeyEvent("\r",KeyEvents.enter)
+	Events.registerKeyEvent("\x7f",KeyEvents.backspace)
