@@ -1,13 +1,15 @@
+from Interface.PromptInterface import Events
 import LanguageControls
+import readchar
 
 class PromptInterface:
 	def __init__(self):
-		pass
+		self.command = ""
 	def execute(self):
 		while True:
-			PROMPT = LanguageControls.VARIABLES["PROMPT"][1]
-			while "!p" in PROMPT:
-				PROMPT = PROMPT.replace("!p",LanguageControls.VARIABLES["CWD"])
-			cmd = input(PROMPT)
-			if cmd == "exit":
+			c = readchar.readkey()
+			if c in Events.KEYPRESS_EVENTS:
+				Events.KEYPRESS_EVENTS[c](self)
+			else:
 				return
+			print(self.command)
