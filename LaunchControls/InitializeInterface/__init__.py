@@ -3,4 +3,4 @@ from LaunchControls.InitializeInterface import PromptInterfaceKeyEvents
 
 def initPromptInterface():
 	Events.registerKeyEvent("\r",PromptInterfaceKeyEvents.enter)
-	Events.registerKeyEvent("\x02",PromptInterfaceKeyEvents.ctrlb)
+	Events.registerKeyEvent("\x7f",PromptInterfaceKeyEvents.backspace)
