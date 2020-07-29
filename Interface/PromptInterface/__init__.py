@@ -4,6 +4,7 @@ from Interface import GetKeyPress
 import LanguageControls
 import readchar
 import sys
+import os
 
 
 class PromptInterface:
@@ -22,7 +23,14 @@ class PromptInterface:
 		if cmd.lower().strip() == "exit":
 			print("\n")
 			sys.exit()
-		print(f"\nUnknown CMD: {cmd}")
+		else:
+			#only for test puporse
+			cmdstrip = cmd.strip().split(" ")
+			cmdfinal = ""
+			for i in cmdstrip:
+				cmdfinal += i + " "
+			os.system(cmdfinal)
+			#print(f"\nUnknown CMD: {cmd}")
 	def getPrompt(self):
 		prompt = f"\r{LanguageControls.VARIABLES['PROMPT'][1]}"
 		while "!p" in prompt:
@@ -38,5 +46,5 @@ class PromptInterface:
 			k = GetKeyPress.listen()
 			if k in Events.KEYPRESS_EVENTS:
 				Events.KEYPRESS_EVENTS[k](self)
-			else:
+			elif (k.isprintable()) and (len(k) == 1):
 				self.command+=k

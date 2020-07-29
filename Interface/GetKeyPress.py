@@ -67,7 +67,7 @@ def listen():
 				return ""
 		else:
 			return ""
-	elif c.isprintable():
+	elif c.isprintable() and (len(c) == 1) :
 		return c
 	else:
 		return ""

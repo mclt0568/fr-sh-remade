@@ -2,6 +2,7 @@ import sys
 import LanguageControls
 
 def Enter(ctx):
+	print("")
 	ctx.appendHistory(ctx.command,False)
 	ctx.execCmd(ctx.command)
 	ctx.command = ""
