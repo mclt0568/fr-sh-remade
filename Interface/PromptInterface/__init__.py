@@ -1,8 +1,10 @@
 from Interface.PromptInterface import Events
 from sys import stdout
+from Interface import GetKeyPress
 import LanguageControls
 import readchar
-import time
+import sys
+
 
 class PromptInterface:
 	def __init__(self):
@@ -12,7 +14,13 @@ class PromptInterface:
 		pass
 	def nextHistory(self,hidden):
 		pass
+	def appendHistory(self,cmd,hidden):
+		if not cmd.strip() == "":
+			self.commandhistory.append([cmd,hidden])
+		#print(self.commandhistory) 
 	def execCmd(self,cmd):
+		if cmd.lower().strip() == "exit":
+			sys.exit()
 		print(f"\nUnknown CMD: {cmd}")
 	def getPrompt(self):
 		prompt = f"\r{LanguageControls.VARIABLES['PROMPT'][1]}"
@@ -24,10 +32,8 @@ class PromptInterface:
 	def execute(self):
 		while True:
 			stdout.write(f"{self.getPrompt()}{self.command}")
-			c = readchar.readkey()
-			if c in Events.KEYPRESS_EVENTS:
-				Events.KEYPRESS_EVENTS[c](self)
-			elif c == "\x03":
-				return
+			k = GetKeyPress.listen()
+			if k in Events.KEYPRESS_EVENTS:
+				Events.KEYPRESS_EVENTS[k](self)
 			else:
-				self.command+=c
+				self.command+=k

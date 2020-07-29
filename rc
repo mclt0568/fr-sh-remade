@@ -1,0 +1,5 @@
+#!/usr/bin/python3
+import readchar
+
+a = readchar.readkey()
+print([a],a)
