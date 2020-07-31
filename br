@@ -1,3 +1,6 @@
 ./bu
+cd output
+chmod +x fr-sh
+cd ..
 ./output/fr-sh
 rm -r output
