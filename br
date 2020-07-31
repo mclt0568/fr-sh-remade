@@ -1,0 +1,3 @@
+./bu
+./output/fr-sh
+rm -r output

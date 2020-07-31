@@ -1,0 +1,131 @@
+#this is a comment
+echo hi #this is also a comment
+
+# --- executing command ---
+ping www.google.com
+ping (www.google.com)
+
+cmd1 -a -b argsample
+cmd1(-a,-b,argsample)
+
+cmd2 -a -b "arg with space"
+cmd2(-a,-b,arg with space)
+cmd2 -a -b (arg with space)
+
+cmd3 -a -b "(brackets as args)"
+
+pipefrom | pipeto
+pipefrom > file
+
+# --- special syntaxs ---
+
+if (conditions) do
+	commands
+	commands
+elif (conditions) do
+	commands
+	commands
+else
+	commands
+	commands
+end
+
+while (conditions) do
+	commands
+	commands
+end
+
+for (number of time) do
+	commands
+end
+
+foreach (var, list) do
+	commands
+end
+
+# --- variables ---
+
+a=1 #number (i)
+a="string" #string (s)
+a=true #boolean (b)
+a=helloworld #dynamic type (treated as string (or number and other things if applicable), can be anything, value is " hello world", space counted) type e
+a={1,2,3,4} #list of dynamic types (l)
+#or if you want
+a=$1
+a=$"string"
+#they are the same
+
+echo $a #directly using variable
+echo $"hello world" #dyrectly using literal
+echo $$ #prints $ (char escape)
+
+ls ${-a,-l,~} #execute ls with arguments from elements of list
+a={-a,-l,~}
+b={-a,-l}
+ls $a #executes ls -a -l ~
+ls $b ~ #executes ls -a -l ~
+
+# --- special variables ---
+
+echo $time #gets current time as list of ints {hr,min,sec}
+echo $time[0] 
+echo $time[1] 
+echo $time[2]
+
+echo $CWD #gets current working directory as string (/home/frankium/Docuemtns)
+echo $SCWD #gets shorten working directory as string (~/Docuemtns)
+echo $PROMPT #prompt, self explainatory
+echo $INFO #gets machine and user info as list of string {machine name, user name} ex: {frlaptop,frankium}
+echo $PATH #gets PATH as dynamic type (e)
+echo $FILE #gets list of Files only in current working directory
+echo $FILES #gets list of Directories and Files in cwd
+echo $DIRS #gets list of Directories in cwd
+
+# --- operators ---
+
+#special syntex
+<operation>identifier
+#examples
+<del>hi
+<num>"1" #gets 1
+<char>"1" #gets 49 (char code)
+<num>"a" #gets "a"
+<num>true #gets 1
+<num>false #gets 0
+<len>"abcd" #gets 4
+<num>{a,b,c,d} #gets 4 (len of thing)
+<bool>anything #if empty or 0, return false; if other, return true
+<strip>" abcd e f " #gets "abcd e f"
+
+#regular + - * / % ^
+#avilable to numbers
+a=$"hi" + $"hello" #"hihello"
+a=$"hi" + true + 1 + {2,3,4} + hi #"hitrue12 3 4hi" 
+a+=3 #a = a + 3
+
+${1,2} += 3 #{1,2,3}
+${1,2,3,4,3,2,1} -= 2 #{1,2,3,4,3,1}
+$<del> {1,2,3,2,1}[2]
+${1,2,3,4} + "a" @ 3 #${1,2,3,"a",4}
+
+#indexing
+$"hi"[1] #i
+$"hello"[1:] #ello
+$"hello"[1:3] #el
+${1,2,3,4}[1] #2
+
+#boolean statements
+a == b
+a != b
+a > b
+a < b
+a and b
+a or b
+a in b
+a >= b
+a <= b
+a -> b #imply gate
+
+#listfilter
+${1,2,3,4}|>=2 #gets {2,3,4}
+${"a.txt","b.txt","c.doc"}|"*.doc" #gets {"c.doc"}

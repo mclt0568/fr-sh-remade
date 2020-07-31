@@ -1,0 +1,9 @@
+rm -r output
+pyinstaller --onefile --paths=/home/frankium/Documents/fr-sh-remade/ main.py
+mkdir output
+cp dist/main output/fr-sh
+cp defaultVariables.json output
+rm -r dist
+rm -r build
+rm -r __pycache__
+rm main.spec

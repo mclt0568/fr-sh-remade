@@ -20,17 +20,21 @@ class PromptInterface:
 			self.commandhistory.append([cmd,hidden])
 		#print(self.commandhistory) 
 	def execCmd(self,cmd):
-		if cmd.lower().strip() == "exit":
-			print("\n")
-			sys.exit()
+		# if cmd.lower().strip() == "exit":
+		# 	print("\n")
+		# 	sys.exit()
+		# else:
+		# 	#only for test puporse
+		# 	cmdstrip = cmd.strip().split(" ")
+		# 	cmdfinal = ""
+		# 	for i in cmdstrip:
+		# 		cmdfinal += i + " "
+		# 	os.system(cmdfinal)
+		# 	#print(f"\nUnknown CMD: {cmd}")
+		if cmd.lower().strip():
+			os.system(cmd)
 		else:
-			#only for test puporse
-			cmdstrip = cmd.strip().split(" ")
-			cmdfinal = ""
-			for i in cmdstrip:
-				cmdfinal += i + " "
-			os.system(cmdfinal)
-			#print(f"\nUnknown CMD: {cmd}")
+			sys.exit()
 	def getPrompt(self):
 		prompt = f"\r{LanguageControls.VARIABLES['PROMPT'][1]}"
 		while "!p" in prompt:

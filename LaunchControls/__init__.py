@@ -14,14 +14,20 @@ def getDefaultPath(path):
 		return cwd
 	return cwd
 
-def launch():
+def preInit():
 	InitialVariables.read()
-	CWD = getDefaultPath(LanguageControls.VARIABLES["CWD"][1])
+
+def init(mode,cwd):
+	CWD = getDefaultPath(cwd)
 	LanguageControls.VARIABLES["CWD"][1] = CWD
 	CWD = CWD.replace(os.path.expanduser("~"),"~")
 	LanguageControls.VARIABLES["SCWD"] = ["s",CWD]
-	InterfaceControl.RegisterInterface("prompt",PromptInterface.PromptInterface)
-	Interface.MODE="prompt"
+	InterfaceControl.RegisterInterface(mode,PromptInterface.PromptInterface)
+	Interface.MODE=mode
+
+def launch():
+	preInit()
+	init("prompt",LanguageControls.VARIABLES["CWD"][1])
 
 	#Register Events and Stuff
 	InitializeInterface.initPromptInterface()
@@ -29,5 +35,8 @@ def launch():
 	#Launch Interface
 	Interface.display()
 
-def launchWithMode():
+def launchWithMode(mode):
+	pass
+
+def launchWithScript(filename):
 	pass
