@@ -11,7 +11,7 @@ fr-sh provide a clearer way to write shell scripts and using as a default shell
 
 Written in: Python3  
 Platform: Ubuntu/Linux  
-Prograss: 30%  
+Progress: 30%  
 
 ## Build and Run
 
