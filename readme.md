@@ -33,10 +33,10 @@ git clone https://www.github.com/mclt0568/fr-sh-remade
 cd fr-sh-remade
 ```
 
-Install Depandencies
+Install Dependencies
 
 ```bash
-./depandencies.sh
+./dependencies.sh
 ```
 
 Build Project
