@@ -9,12 +9,14 @@ def Enter(ctx):
 
 def Backspace(ctx):
 	sys.stdout.write("\r"+(" " * len(f"{ctx.getPrompt()}{ctx.command}")))
+	sys.stdout.flush()
 	if ctx.command:
 		ctx.command = ctx.command[:-1]
 
 def Ctrl_C(ctx):
 	ctx.appendHistory(ctx.command,True)
 	sys.stdout.write("\r"+(" " * len(f"{ctx.getPrompt()}{ctx.command}")))
+	sys.stdout.flush()
 	ctx.command = ""
 
 def Up(ctx):
