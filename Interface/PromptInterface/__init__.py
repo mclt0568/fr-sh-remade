@@ -47,6 +47,7 @@ class PromptInterface:
 	def execute(self):
 		while True:
 			stdout.write(f"{self.getPrompt()}{self.command}")
+			stdout.flush()
 			k = GetKeyPress.listen()
 			if k in Events.KEYPRESS_EVENTS:
 				Events.KEYPRESS_EVENTS[k](self)
