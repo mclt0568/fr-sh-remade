@@ -10,18 +10,26 @@ class HistoryRecorder:
 		return ["",False]
 	def nextIndex(self):
 		if self.index == len(self.history):
-			self.index == 0
-			return
-		elif self.index == 0:
+			self.index = 0 
 			return
 		self.index += 1
+		# if self.index == len(self.history):
+		# 	self.index == 0
+		# 	return
+		# # elif self.index == 0:
+		# # 	return
+		# self.index += 1
 	def prevIndex(self):
 		if self.index == 0:
 			self.index = len(self.history)
 			return
-		elif self.index == 1:
-			return
 		self.index -= 1
+		# if self.index == 0:
+		# 	self.index = len(self.history)
+		# 	return
+		# # elif self.index == 1:
+		# # 	return
+		# self.index -= 1
 	def append(self,command,isHidden):
 		self.history.append([command,isHidden])
 		self.resetIndex()
