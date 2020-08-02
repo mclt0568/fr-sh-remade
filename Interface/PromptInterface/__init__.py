@@ -20,7 +20,7 @@ class PromptInterface:
 			self.commandhistory.append([cmd,hidden])
 		#print(self.commandhistory) 
 	def execCmd(self,cmd):
-		processed = cmd.lower().strip().split(" ")
+		processed = cmd.strip().split(" ")
 		#Just for testing purpose, will add language parsing and other things after planning
 		if processed:
 			args = processed[1:]

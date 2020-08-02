@@ -1,5 +1,5 @@
 rm -r output
-pyinstaller --onefile --paths=/home/frankium/Documents/fr-sh-remade/ main.py
+pyinstaller --onefile --paths=/home/frankium/Documents/fr-sh-remade/ ./main.py
 mkdir output
 cp dist/main output/fr-sh
 cp defaultVariables.json output
