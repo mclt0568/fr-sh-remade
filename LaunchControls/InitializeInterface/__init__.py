@@ -7,3 +7,5 @@ def initPromptInterface():
 	Events.registerKeyEvent("Ctrl_C",KeyEvents.Ctrl_C)
 	Events.registerKeyEvent("Ctrl_Up",KeyEvents.Ctrl_Up)
 	Events.registerKeyEvent("Up",KeyEvents.Up)
+	Events.registerKeyEvent("Ctrl_Down",KeyEvents.Ctrl_Down)
+	Events.registerKeyEvent("Down",KeyEvents.Down)

@@ -1,4 +1,5 @@
 from Interface.PromptInterface import Events
+from Interface.PromptInterface.HistoryRecorder import HistoryRecorder
 from sys import stdout
 from Interface import GetKeyPress
 import LanguageControls
@@ -6,19 +7,16 @@ import readchar
 import sys
 import os
 
-
 class PromptInterface:
 	def __init__(self):
-		self.commandhistory = []
+		self.commandHistory = HistoryRecorder()
 		self.command = ""
-	def prevHistory(self,hidden):
-		pass
-	def nextHistory(self,hidden):
-		pass
 	def appendHistory(self,cmd,hidden):
 		if not cmd.strip() == "":
-			self.commandhistory.append([cmd,hidden])
-		#print(self.commandhistory) 
+			self.commandHistory.append(cmd,hidden)
+	def clearCommandArea(self):
+		sys.stdout.write("\r"+(" " * len(f"{self.getPrompt()}{self.command}")))
+		sys.stdout.flush()
 	def execCmd(self,cmd):
 		processed = cmd.strip().split(" ")
 		#Just for testing purpose, will add language parsing and other things after planning
@@ -58,6 +56,9 @@ class PromptInterface:
 			stdout.write(f"{self.getPrompt()}{self.command}")
 			stdout.flush()
 			k = GetKeyPress.listen()
+			# print(Events.KEYPRESS_EVENTS)
+			# print(k)
+			# print(k in Events.KEYPRESS_EVENTS)
 			if k in Events.KEYPRESS_EVENTS:
 				Events.KEYPRESS_EVENTS[k](self)
 			elif (k.isprintable()) and (len(k) == 1):
