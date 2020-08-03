@@ -17,8 +17,9 @@ def Backspace(ctx):
 		ctx.command = ctx.command[:-1]
 
 def Ctrl_C(ctx):
-	ctx.appendHistory(ctx.command,True)
-	ctx.clearCommandArea()
+	if ctx.command.strip():
+		ctx.appendHistory(ctx.command,True)
+	sys.stdout.write(f"{ctx.getPrompt()}\033[9m{ctx.command}\033[0m\n")
 	sys.stdout.flush()
 	ctx.command = ""
 

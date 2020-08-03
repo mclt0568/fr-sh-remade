@@ -3,9 +3,10 @@ from LanguageControls import Variables
 from DirControls import Executables
 
 #launch with interface
-LaunchControls.launch()
+# LaunchControls.launch()
 
 # launch without interface
-# LaunchControls.preInit()
-# LaunchControls.init("prompt",LanguageControls.VARIABLES["CWD"][1])
-# print(LanguageControls.VARIABLES["CWD"])
+LaunchControls.preInit()
+LaunchControls.init("prompt",LanguageControls.VARIABLES["CWD"][1])
+print(LanguageControls.VARIABLES["CWD"])
+print(LanguageControls.VARIABLES["SCWD"])
