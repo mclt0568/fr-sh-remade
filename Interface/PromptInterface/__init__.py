@@ -3,6 +3,7 @@ from Interface.PromptInterface.HistoryRecorder import HistoryRecorder
 from sys import stdout
 from Interface import GetKeyPress
 import LanguageControls
+import DirControls
 import readchar
 import sys
 import os
@@ -24,12 +25,12 @@ class PromptInterface:
 			args = processed[1:]
 			if processed[0] == "cd":
 				if args:
-					if os.path.isdir(args[0]):
-						path = os.path.abspath(args[0])
-						os.chdir(path)
-						LanguageControls.VARIABLES["CWD"] = path
-						path = path.replace(os.path.expanduser("~"),"~")
-						LanguageControls.VARIABLES["SCWD"] = ["s",path]
+					if os.path.isdir(DirControls.getRealPath(args[0])):
+						path = DirControls.getRealPath(args[0])
+						DirControls.chdir(path)
+						# LanguageControls.VARIABLES["CWD"] = path
+						# path = path.replace(os.path.expanduser("~"),"~")
+						# LanguageControls.VARIABLES["SCWD"] = ["s",path]
 					else:
 						print(f"[fr-sh][!] {args[0]} is not a valid directory")
 				else:

@@ -1,5 +1,6 @@
 from os import path
 import LanguageControls
+import os
 
 CURRENT_EXECUTABLES = []
 PATH_EXECUTABLES = []
@@ -16,10 +17,15 @@ def getShortPath(p):
 		processed = path.join(processed,i)
 	return processed
 
+def getRealPath(p):
+	return path.realpath(path.expanduser(p))
+
 def updateCWDVars(p):
-	fullpath = path.realpath(path.expanduser(p))
+	fullpath = getRealPath(p)
 	LanguageControls.VARIABLES["CWD"] = ["s",fullpath]
 	LanguageControls.VARIABLES["SCWD"] = ["s",getShortPath(p)]
 
 def chdir(p):
-	pass
+	fullpath = getRealPath(p)
+	os.chdir(fullpath)
+	updateCWDVars(fullpath)

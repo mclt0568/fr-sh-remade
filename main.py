@@ -1,12 +1,12 @@
 import LanguageControls,LaunchControls
 from LanguageControls import Variables
-from DirControls import Executables
+import DirControls
 
 #launch with interface
-# LaunchControls.launch()
+LaunchControls.launch()
 
 # launch without interface
-LaunchControls.preInit()
-LaunchControls.init("prompt",LanguageControls.VARIABLES["CWD"][1])
-print(LanguageControls.VARIABLES["CWD"])
-print(LanguageControls.VARIABLES["SCWD"])
+# LaunchControls.preInit()
+# LaunchControls.init("prompt",LanguageControls.VARIABLES["CWD"][1])
+
+print(DirControls.getRealPath("~"))
