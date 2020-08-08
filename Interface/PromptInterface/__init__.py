@@ -12,6 +12,7 @@ class PromptInterface:
 	def __init__(self):
 		self.commandHistory = HistoryRecorder()
 		self.command = ""
+		self.commandCarrot = 0
 	def appendHistory(self,cmd,hidden):
 		if not cmd.strip() == "":
 			self.commandHistory.append(cmd,hidden)
@@ -52,10 +53,14 @@ class PromptInterface:
 		while "!c" in prompt:
 			prompt = prompt.replace("!c","\033[")
 		return prompt
+	def setCarrot(self,index):
+		stdout.write(f"{self.getPrompt()}{self.command}")
+		stdout.flush()
+		stdout.write(f"{self.getPrompt()}{self.command[:self.commandCarrot]}")
+		stdout.flush()
 	def execute(self):
 		while True:
-			stdout.write(f"{self.getPrompt()}{self.command}")
-			stdout.flush()
+			self.setCarrot(self.commandCarrot)
 			k = GetKeyPress.listen()
 			# print(Events.KEYPRESS_EVENTS)
 			# print(k)
@@ -63,4 +68,5 @@ class PromptInterface:
 			if k in Events.KEYPRESS_EVENTS:
 				Events.KEYPRESS_EVENTS[k](self)
 			elif (k.isprintable()) and (len(k) == 1):
-				self.command+=k
+				self.command = self.command[:self.commandCarrot] + k + self.command[self.commandCarrot:]
+				self.commandCarrot += 1

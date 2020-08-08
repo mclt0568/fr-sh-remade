@@ -9,12 +9,14 @@ def Enter(ctx):
 		ctx.commandHistory.resetIndex()
 	ctx.execCmd(ctx.command)
 	ctx.command = ""
+	ctx.commandCarrot = 0
 
 def Backspace(ctx):
 	ctx.clearCommandArea()
 	sys.stdout.flush()
-	if ctx.command:
-		ctx.command = ctx.command[:-1]
+	if ctx.commandCarrot:
+		ctx.command = ctx.command[:ctx.commandCarrot] + ctx.command[ctx.commandCarrot+1:]
+		ctx.commandCarrot -= 1
 
 def Ctrl_C(ctx):
 	if ctx.command.strip():
@@ -22,6 +24,7 @@ def Ctrl_C(ctx):
 	sys.stdout.write(f"{ctx.getPrompt()}\033[9m{ctx.command}\033[0m\n")
 	sys.stdout.flush()
 	ctx.command = ""
+	ctx.commandCarrot = 0
 
 def Up(ctx):
 	ctx.clearCommandArea()
@@ -38,3 +41,11 @@ def Down(ctx):
 def Ctrl_Down(ctx):
 	ctx.clearCommandArea()
 	ctx.command = ctx.commandHistory.getNextHistory(True)[0]
+
+def Left(ctx):
+	if ctx.commandCarrot > 0:
+		ctx.commandCarrot -= 1
+
+def Right(ctx):
+	if ctx.commandCarrot < len(ctx.command):
+		ctx.commandCarrot += 1

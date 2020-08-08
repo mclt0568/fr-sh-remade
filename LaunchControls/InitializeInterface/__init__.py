@@ -9,3 +9,5 @@ def initPromptInterface():
 	Events.registerKeyEvent("Up",KeyEvents.Up)
 	Events.registerKeyEvent("Ctrl_Down",KeyEvents.Ctrl_Down)
 	Events.registerKeyEvent("Down",KeyEvents.Down)
+	Events.registerKeyEvent("Left",KeyEvents.Left)
+	Events.registerKeyEvent("Right",KeyEvents.Right)
