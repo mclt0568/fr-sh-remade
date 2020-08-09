@@ -15,7 +15,7 @@ def Backspace(ctx):
 	ctx.clearCommandArea()
 	sys.stdout.flush()
 	if ctx.commandCarrot:
-		ctx.command = ctx.command[:ctx.commandCarrot] + ctx.command[ctx.commandCarrot+1:]
+		ctx.command = ctx.command[:ctx.commandCarrot-1] + ctx.command[ctx.commandCarrot:]
 		ctx.commandCarrot -= 1
 
 def Ctrl_C(ctx):
