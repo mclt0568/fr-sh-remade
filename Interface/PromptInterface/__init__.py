@@ -1,12 +1,37 @@
+from Interface import GetKeyPress
+from Interface.PromptInterface import PromptVariables
+from Interface.PromptInterface.PromptVariables import EscapeFunctions
 from Interface.PromptInterface import Events
+from Interface.PromptInterface.Events import KeyEvents
 from Interface.PromptInterface.HistoryRecorder import HistoryRecorder
 from sys import stdout
-from Interface import GetKeyPress
 import LanguageControls
 import DirControls
 import readchar
 import sys
 import os
+
+def RegisterDefaultEvents():
+	Events.registerKeyEvent("Enter",KeyEvents.Enter)
+	Events.registerKeyEvent("Backspace",KeyEvents.Backspace)
+	Events.registerKeyEvent("Ctrl_C",KeyEvents.Ctrl_C)
+	Events.registerKeyEvent("Ctrl_Up",KeyEvents.Ctrl_Up)
+	Events.registerKeyEvent("Up",KeyEvents.Up)
+	Events.registerKeyEvent("Ctrl_Down",KeyEvents.Ctrl_Down)
+	Events.registerKeyEvent("Down",KeyEvents.Down)
+	Events.registerKeyEvent("Left",KeyEvents.Left)
+	Events.registerKeyEvent("Right",KeyEvents.Right)
+
+def RegisterPromptVariables():
+	PromptVariables.registerEscapes("!p",EscapeFunctions.fullPath)
+	PromptVariables.registerEscapes("!s",EscapeFunctions.shortPath)
+	PromptVariables.registerEscapes("!f",EscapeFunctions.currentFolder)
+	PromptVariables.registerEscapes("!h",EscapeFunctions.getHostName)
+	PromptVariables.registerEscapes("!o",EscapeFunctions.getOsName)
+	PromptVariables.registerEscapes("!u",EscapeFunctions.getUsername)
+
+RegisterDefaultEvents()
+RegisterPromptVariables()
 
 class PromptInterface:
 	def __init__(self):
@@ -45,13 +70,14 @@ class PromptInterface:
 			print("")
 			#Endi of
 	def getPrompt(self):
-		prompt = f"\r{LanguageControls.VARIABLES['PROMPT'][1]}"
-		while "!p" in prompt:
-			prompt = prompt.replace("!p",LanguageControls.VARIABLES["CWD"][1])
-		while "!s" in prompt:
-			prompt = prompt.replace("!s",LanguageControls.VARIABLES["SCWD"][1])
-		while "!c" in prompt:
-			prompt = prompt.replace("!c","\033[")
+		return "\r" + PromptVariables.getPrompt(self,LanguageControls.VARIABLES["PROMPT"][1])
+		# prompt = f"\r{LanguageControls.VARIABLES['PROMPT'][1]}"
+		# while "!p" in prompt:
+		# 	prompt = prompt.replace("!p",LanguageControls.VARIABLES["CWD"][1])
+		# while "!s" in prompt:
+		# 	prompt = prompt.replace("!s",LanguageControls.VARIABLES["SCWD"][1])
+		# while "!c" in prompt:
+		# 	prompt = prompt.replace("!c","\033[")
 		return prompt
 	def setCarrot(self,index):
 		stdout.write(f"{self.getPrompt()}{self.command}")
