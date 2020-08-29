@@ -38,6 +38,7 @@ Install Dependencies
 ```bash
 ./dependencies.sh
 ```
+and makesure install the ply parser [here](https://www.dabeaz.com/ply/)
 
 Build Project
 
