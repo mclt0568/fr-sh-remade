@@ -7,6 +7,9 @@ Not a pro at programming, just thinking of making my own shell
 ## Why fr-sh
 fr-sh provide a clearer way to write shell scripts and using as a default shell
 
+## The YTScript Branch
+this is a testing branch which I tries to recreate the [YTScript](https://www.github.com/mclt0568/YTScript) intepreter into this project as a new Interface.
+
 ## Informations
 
 Written in: Python3  
