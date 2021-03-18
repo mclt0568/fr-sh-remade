@@ -11,28 +11,6 @@ import readchar
 import sys
 import os
 
-def RegisterDefaultEvents():
-	Events.registerKeyEvent("Enter",KeyEvents.Enter)
-	Events.registerKeyEvent("Backspace",KeyEvents.Backspace)
-	Events.registerKeyEvent("Ctrl_C",KeyEvents.Ctrl_C)
-	Events.registerKeyEvent("Ctrl_Up",KeyEvents.Ctrl_Up)
-	Events.registerKeyEvent("Up",KeyEvents.Up)
-	Events.registerKeyEvent("Ctrl_Down",KeyEvents.Ctrl_Down)
-	Events.registerKeyEvent("Down",KeyEvents.Down)
-	Events.registerKeyEvent("Left",KeyEvents.Left)
-	Events.registerKeyEvent("Right",KeyEvents.Right)
-
-def RegisterPromptVariables():
-	PromptVariables.registerEscapes("!p",EscapeFunctions.fullPath)
-	PromptVariables.registerEscapes("!s",EscapeFunctions.shortPath)
-	PromptVariables.registerEscapes("!f",EscapeFunctions.currentFolder)
-	PromptVariables.registerEscapes("!h",EscapeFunctions.getHostName)
-	PromptVariables.registerEscapes("!o",EscapeFunctions.getOsName)
-	PromptVariables.registerEscapes("!u",EscapeFunctions.getUsername)
-
-RegisterDefaultEvents()
-RegisterPromptVariables()
-
 class PromptInterface:
 	def __init__(self):
 		self.commandHistory = HistoryRecorder()

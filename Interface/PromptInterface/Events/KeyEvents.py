@@ -1,6 +1,8 @@
 import sys
 import LanguageControls
+from Interface.PromptInterface.Events import keyEvent
 
+@keyEvent("Enter")
 def Enter(ctx):
 	print("")
 	if ctx.command.strip():
@@ -11,6 +13,7 @@ def Enter(ctx):
 	ctx.command = ""
 	ctx.commandCarrot = 0
 
+@keyEvent("Backspace")
 def Backspace(ctx):
 	ctx.clearCommandArea()
 	sys.stdout.flush()
@@ -18,6 +21,7 @@ def Backspace(ctx):
 		ctx.command = ctx.command[:ctx.commandCarrot-1] + ctx.command[ctx.commandCarrot:]
 		ctx.commandCarrot -= 1
 
+@keyEvent("Ctrl_C")
 def Ctrl_C(ctx):
 	if ctx.command.strip():
 		ctx.appendHistory(ctx.command,True)
@@ -26,26 +30,32 @@ def Ctrl_C(ctx):
 	ctx.command = ""
 	ctx.commandCarrot = 0
 
+@keyEvent("Up")
 def Up(ctx):
 	ctx.clearCommandArea()
 	ctx.command = ctx.commandHistory.getPrevHistory(False)[0]
 
+@keyEvent("Ctrl_Up")
 def Ctrl_Up(ctx):
 	ctx.clearCommandArea()
 	ctx.command = ctx.commandHistory.getPrevHistory(True)[0]
 
+@keyEvent("Down")
 def Down(ctx):
 	ctx.clearCommandArea()
 	ctx.command = ctx.commandHistory.getNextHistory(False)[0]
 
+@keyEvent("Ctrl_Down")
 def Ctrl_Down(ctx):
 	ctx.clearCommandArea()
 	ctx.command = ctx.commandHistory.getNextHistory(True)[0]
 
+@keyEvent("Left")
 def Left(ctx):
 	if ctx.commandCarrot > 0:
 		ctx.commandCarrot -= 1
 
+@keyEvent("Right")
 def Right(ctx):
 	if ctx.commandCarrot < len(ctx.command):
 		ctx.commandCarrot += 1
